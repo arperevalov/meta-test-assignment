@@ -1,3 +1,5 @@
+import md5 from "md5";
+
 class DB {
     constructor() {
         this.db = JSON.parse(localStorage.getItem('users'));
@@ -17,22 +19,25 @@ class DB {
         return true
     }
 
+    // search for user ID at DB
+    getUserID(login) {
+        return this.db.findIndex((a) => {
+            return a.login === login;
+        });
+    }
+
     // set user to Database
     setUser(formData) {
         return new Promise((res, rej) => {
-
-            let index = this.db.findIndex((a) => {
-                return a.login === formData.login;
-            });
-
-            if (index >= 0) {
-                rej(`user ${formData.login} exists!`)
+            if (this.getUserID(formData.login) >= 0) {
+                rej(`Пользователь с логином ${formData.login} уже существует`)
             } else {
                 this.db = [
                     ...this.db,
                     {
                         id: this.db.length,
-                        ...formData
+                        ...formData,
+                        pass: md5(formData.pass)
                     },
                 ];
 
@@ -44,17 +49,13 @@ class DB {
     // check passwords and log user to app
     logUser(login, pass) {
         return new Promise((res, rej) => {
-            let index = this.db.findIndex((a) => {
-                return a.login === login;
-            });
-
-            if (index < 0) {
-                rej(`user ${login} doesn't exist!`)
+            if (this.getUserID(login) < 0) {
+                rej(`Пользователя с логином ${formData.login} не существует`)
             } else {
-                if (this.db[index].pass === pass) {
+                if (this.db[this.getUserID(login)].pass === md5(pass)) {
                     res(true)
                 } else {
-                    rej('password is incorrect!')
+                    rej('Введен неправильный пароль')
                 }
             }
         })
@@ -68,7 +69,7 @@ class DB {
         });
 
         if (index < 0) {
-            return `user ${login} doesn't exist!`
+            return `Пользователя с логином ${formData.login} не существует`
         } else {
 
             return {

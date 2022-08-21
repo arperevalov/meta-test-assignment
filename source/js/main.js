@@ -56,9 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
         inputs.forEach(input => {
             const elementInput = input.querySelector('input')
             const elementBtn = input.querySelector('.js-pass-toggle-btn')
+            const elementBtnLine = elementBtn.querySelector('.js-pass-toggle-btn-line')
 
             elementBtn.addEventListener('click', ()=>{
                 elementInput.setAttribute('type', elementInput.getAttribute('type') === 'password' ? 'text' : 'password')
+                if (elementBtnLine.classList.contains('show')) {
+                    elementBtnLine.classList.remove('show')
+                } else {
+                    elementBtnLine.classList.add('show')
+                }
             })
         })
     }

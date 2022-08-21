@@ -1,10 +1,12 @@
 import Router from './Router';
 import DB from './DB';
+import SystemMessages from './SystemMessages';
 
 class App {
     constructor() {
-        this.router = new Router(this);
-        this.db = new DB(this);
+        this.router = new Router();
+        this.db = new DB();
+        this.systemMessages = new SystemMessages();
         this.logged = JSON.parse(localStorage.getItem('logged'));
         this.checkRouterLogged();
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
@@ -21,7 +23,7 @@ class App {
                 return result
             })
             .catch(e => {
-                console.log(e)
+                this.systemMessages.setMessage(e)
             })
     }
 
@@ -36,7 +38,7 @@ class App {
                 return result
             })
             .catch(e => {
-                console.log(e)
+                this.systemMessages.setMessage(e)
             })
     }
 

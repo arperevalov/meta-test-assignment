@@ -17,6 +17,7 @@
 
         &:read-only
             pointer-events: none
+            color: theme-color(muted)
 
     &__label
         font-size: rem(14)
@@ -35,5 +36,12 @@
         right: 0
         transition: $transition-fast
 
-        &:hover
-            opacity: .4
+        &:focus-visible, &:hover
+            fill: theme-color(active)
+
+    &__toggle-pass-line
+        width: 0
+        transition: $transition-fast
+
+        &.show
+            width: 100%

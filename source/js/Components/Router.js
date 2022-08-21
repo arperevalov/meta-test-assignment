@@ -1,5 +1,5 @@
 class Router {
-    constructor(app) {
+    constructor() {
         this.routes = {
             home: '/index.html',
             login: '/login.html',
@@ -7,7 +7,6 @@ class Router {
         }
         this.currentRoute = window.location.pathname;
         this.root = '/';
-        this.app = app;
     }
 
     // redirect user
