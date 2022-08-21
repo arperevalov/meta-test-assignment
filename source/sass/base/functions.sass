@@ -1,0 +1,8 @@
+@import './variables'
+
+@function rem($value) 
+    $remValue: calc($value / $base-font-size) + rem
+    @return $remValue
+
+@function theme-color($value)
+    @return map-get($colors, $value)

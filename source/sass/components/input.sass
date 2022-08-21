@@ -1,0 +1,39 @@
+.input
+    position: relative
+    width: 100%
+    margin: $input-margin
+
+    &__input
+        height: $input-height
+        width: 100%
+        font-size: rem(16)
+        outline: none
+        border: none
+        border-bottom: 1px solid theme-color(base)
+        transition: $transition-fast
+        
+        &:focus-visible, &:hover
+            border-color: theme-color(active)
+
+        &:read-only
+            pointer-events: none
+
+    &__label
+        font-size: rem(14)
+
+    &__toggle-pass
+        background: transparent
+        border: none
+        outline: none
+        fill: theme-color(base)
+        opacity: .8
+        cursor: pointer
+        width: fit-content
+        height: fit-content
+        position: absolute
+        bottom: 0
+        right: 0
+        transition: $transition-fast
+
+        &:hover
+            opacity: .4
