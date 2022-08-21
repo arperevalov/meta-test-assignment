@@ -1,7 +1,6 @@
 import Router from './Router';
 import DB from './DB';
 import SystemMessages from './SystemMessages';
-import md5 from 'md5';
 
 class App {
     constructor() {
@@ -12,11 +11,14 @@ class App {
         this.checkRouterLogged();
     }
 
+    getCurrentUserFromDb() {
+        return this.db.getCurrentUser();
+    }
+
     // sets user to DB
     setUserToDb(formData) {
         this.db.setUser(formData)
             .then(result => {
-                this.cacheUser(formData.login, md5(formData.pass));
                 this.checkRouterLogged();
                 this.redirect(this.router.routes.home)
                 return result
@@ -27,10 +29,9 @@ class App {
     }
 
     // logs user to app and redirect to homepage
-    logUser(login, pass) {
-        this.db.logUser(login, pass)
+    logUser(formData) {
+        this.db.logUser(formData)
             .then(result => {
-                this.cacheUser(login, md5(pass));
                 this.checkRouterLogged();
                 this.redirect(this.router.routes.home);
                 return result
@@ -42,43 +43,50 @@ class App {
 
     // logs out user
     logoutUser() {
-        this.clearUserCache();
+        this.db.logoutUser();
         this.router.checkLogged();
     }
 
-    // gets user data
+    updateUserData(formData) {
+        this.db.updateUserData(formData)
+        .then(result => {
+            this.systemMessages.setMessage('Пользователь успешно обновлен!')
+            return result
+        })
+        .catch(e => {
+            this.systemMessages.setMessage(e)
+        })
+    }
+
+    // updatesUserPass
+    updateUserPass(formData) {
+        this.db.updateUserPass(formData)
+        .then(result => {
+            // this.cacheUser(login, md5(pass));
+            this.systemMessages.setMessage('Пароль успешно обновлен!')
+            return result
+        })
+        .catch(e => {
+            this.systemMessages.setMessage(e)
+        })
+    }
+
+    // gets user data from DB
     async getUserData() {
-        let userData = await this.db.getUserData(this.currentUser)
+        let userData = await this.db.getUserData()
         if (userData !== undefined) {
             return userData
         }
     }
 
-    // checks if current user logged
+    // checks if has currentUser to restore session
     checkRouterLogged() {
-        this.router.checkLogged(this.currentUser)
+        this.router.checkLogged(this.getCurrentUserFromDb())
     }
 
-    // redirects user
+    // redirect
     redirect(url) {
         this.router.redirect(url)
-    }
-
-    // R E F A C T O R
-
-    // memorize user to so-called-session
-    cacheUser(login, pass) {
-        this.currentUser = {
-            login,
-            pass
-        };
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
-    }
-
-    // clears user from so-called-session
-    clearUserCache() {
-        this.currentUser = null;
-        localStorage.removeItem('currentUser')
     }
 }
 

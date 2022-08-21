@@ -29,7 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            app.logUser(form.login.value, form.pass.value);
+            app.logUser({
+                login: form.login.value, 
+                pass: form.pass.value
+            });
         });
     }
 
@@ -50,6 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
             form.querySelector('input#tel').value = res.tel;
         });
 
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            app.updateUserData({
+                email: form.email.value,
+                tel: form.tel.value
+            })
+        })
+    }
+
+    if (document.getElementById('new-password-form')) {
+        let form = document.getElementById('new-password-form');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            app.updateUserPass({pass: form.newPass2.value});
+        });
     }
 
     //  js-pass-toggle init
