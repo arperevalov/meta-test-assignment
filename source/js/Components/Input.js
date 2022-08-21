@@ -12,9 +12,39 @@ class Input {
     constructor(element) {
         this.element = element;
         this.errorBlock = null;
+        this.copy = null;
         this.type = this.element.getAttribute('data-custom-type');
         this.required = this.element.getAttribute('required') === null ? false : true;
+        // this.addListener();
+        // this.createMaskCopy();
     }
+
+    // createMaskCopy() {
+    //     this.copy = this.element.cloneNode();
+    //     this.copy.id = this.element.id + 'Copy';
+    //     this.copy.setAttribute('type', 'text');
+    //     this.element.parentNode.appendChild(this.copy);
+    // }
+
+    // addListener() {
+    //     this.element.addEventListener('input', () => {
+    //         this.copy.value = this.element.value
+    //         this.copy.value = this.copy.value.replace(/\D/g, '')
+    //         if (this.copy.value.length === 2) {
+    //             this.element.value = this.copy.value + ' '
+    //         } 
+    //         if (this.copy.value.length === 4) {
+    //             this.element.value = '+7' + ' (' + this.copy.value.slice(1, 4) + ') '
+    //         }
+    //         if (this.copy.value.length === 7) {
+    //             this.element.value = '+7' + ' (' + this.copy.value.slice(1, 4) + ') ' + this.copy.value.slice(4, 7 )+ ' '
+    //         }
+    //         if (this.copy.value.length === 9) {
+    //             this.element.value = '+7' + ' (' + this.copy.value.slice(1, 4) + ') ' + this.copy.value.slice(4, 7 )+ ' ' + this.copy.value.slice(7, 9 )+ ' '
+    //         }
+    //     })
+
+    // }
 
     generateError(text) {
         this.errorBlock = document.createElement('div');
