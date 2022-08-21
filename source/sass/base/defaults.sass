@@ -1,6 +1,5 @@
 html
     font-size: $base-font-size + px
-    font-family: 'arial'
 
 body
     background: theme-color('body')
@@ -17,6 +16,14 @@ body
     overflow: hidden
     text-overflow: clip
 
+.hr
+    display: block
+    width: 100%
+    height: 1px
+    background: theme-color(light-stroke)
+    margin: rem(16) 0
+    opacity: .5
+
 .h1, .h2, .h3, .h4, .h5, .h6
     font-weight: 500
 
@@ -27,3 +34,9 @@ body
 .h2
     font-size: rem(26)
     margin-bottom: rem(16)
+
+.small
+    font-size: rem(14)
+
+.text-muted
+    color: theme-color(muted)

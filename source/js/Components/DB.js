@@ -7,13 +7,13 @@ class DB {
     // set DB if not set
     init() {
         if (this.db === null) {
-            localStorage.setItem("users", JSON.stringify([]));
+            localStorage.setItem('users', JSON.stringify([]));
         }
     }
 
     // set updates to DB
     updateDb() {
-        localStorage.setItem("users", JSON.stringify(this.db));
+        localStorage.setItem('users', JSON.stringify(this.db));
         return true
     }
 

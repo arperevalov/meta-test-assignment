@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <main class="main">
         <h1 class="h1">Авторизация</h1>
@@ -14,15 +16,18 @@
                 <label class="input__label" for="login">Логин*</label>
                 <input class="input__input" id="login" type="text">
             </div>
-            <div class="input">
-                <label class="input__label" for="pass">Новый пароль*</label>
+            <div class="input js-pass-toggle">
+                <label class="input__label" for="pass">Пароль*</label>
                 <input class="input__input" id="pass" type="password">
-                <button type="button" class="input__toggle-pass">
+                <button type="button" class="input__toggle-pass js-pass-toggle-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 9.27283C10.4954 9.27283 9.27271 10.4955 9.27271 12.0001C9.27271 13.5046 10.4954 14.7274 12 14.7274C13.5045 14.7274 14.7272 13.5046 14.7272 12.0001C14.7272 10.4955 13.5045 9.27283 12 9.27283Z"/>
-                        <path d="M12 5.18188C7.45454 5.18188 3.57274 8.00913 2 12.0001C3.57274 15.9909 7.45454 18.8182 12 18.8182C16.55 18.8182 20.4273 15.9909 22 12.0001C20.4273 8.00913 16.55 5.18188 12 5.18188ZM12 16.5455C9.49091 16.5455 7.45454 14.5091 7.45454 12C7.45454 9.49093 9.49091 7.4546 12 7.4546C14.5091 7.4546 16.5455 9.49097 16.5455 12.0001C16.5455 14.5091 14.5091 16.5455 12 16.5455Z"/>
-                        <rect id="input__toggle-pass-line" x="2.05192" y="16.9909" width="21.2807" height="1.83333" rx="0.916666" transform="rotate(-33.0777 2.05192 16.9909)" stroke="white"/>
-                    </svg>                        
+                        <path
+                            d="M12 9.27283C10.4954 9.27283 9.27271 10.4955 9.27271 12.0001C9.27271 13.5046 10.4954 14.7274 12 14.7274C13.5045 14.7274 14.7272 13.5046 14.7272 12.0001C14.7272 10.4955 13.5045 9.27283 12 9.27283Z" />
+                        <path
+                            d="M12 5.18188C7.45454 5.18188 3.57274 8.00913 2 12.0001C3.57274 15.9909 7.45454 18.8182 12 18.8182C16.55 18.8182 20.4273 15.9909 22 12.0001C20.4273 8.00913 16.55 5.18188 12 5.18188ZM12 16.5455C9.49091 16.5455 7.45454 14.5091 7.45454 12C7.45454 9.49093 9.49091 7.4546 12 7.4546C14.5091 7.4546 16.5455 9.49097 16.5455 12.0001C16.5455 14.5091 14.5091 16.5455 12 16.5455Z" />
+                        <rect id="input__toggle-pass-line" x="2.05192" y="16.9909" width="21.2807" height="1.83333"
+                            rx="0.916666" transform="rotate(-33.0777 2.05192 16.9909)" stroke="white" />
+                    </svg>
 
                     <span class="visually-hidden">
                         Показать пароль
@@ -34,6 +39,14 @@
         </form>
 
         <a class="btn btn--link" href="./reg.html">Регистрация</a>
+
+        <div class="hr"></div>
+
+        <small class="small text-muted">
+            Нажимая кнопку «Авторизоваться», пользователь соглашается с политикой в отношении обработки персональных
+            данных и публичной офертой
+        </small>
     </main>
 </body>
+
 </html>

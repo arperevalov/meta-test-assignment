@@ -6,7 +6,7 @@ class Router {
             reg: '/reg.html',
         }
         this.currentRoute = window.location.pathname;
-        this.root = "/";
+        this.root = '/';
         this.app = app;
     }
 

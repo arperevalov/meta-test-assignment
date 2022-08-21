@@ -1,5 +1,5 @@
-import Router from "./Router";
-import DB from "./DB";
+import Router from './Router';
+import DB from './DB';
 
 class App {
     constructor() {
