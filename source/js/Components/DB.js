@@ -8,7 +8,7 @@ class DB {
 
     // set DB if not set
     init() {
-        if (this.db === null) {
+        if (this.db === null || this.db === undefined) {
             localStorage.setItem('users', JSON.stringify([]));
         }
     }
@@ -62,20 +62,19 @@ class DB {
     }
 
     // get data of user from DB
-    getUserData(login) {
+    getUserData(user) {
 
-        let index = this.db.findIndex((a) => {
-            return a.login === login;
-        });
+        const index = this.getUserID(user.login)
 
         if (index < 0) {
-            return `Пользователя с логином ${formData.login} не существует`
+            return `Пользователя с логином ${user.login} не существует`
         } else {
-
-            return {
-                login: this.db[index].login,
-                email: this.db[index].email,
-                tel: this.db[index].tel
+            if (this.db[index].login === user.login && this.db[index].pass === user.pass) {
+                return {
+                    login: this.db[index].login,
+                    email: this.db[index].email,
+                    tel: this.db[index].tel
+                }
             }
         }
     }

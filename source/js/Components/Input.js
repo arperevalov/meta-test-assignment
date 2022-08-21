@@ -28,7 +28,7 @@ class Input {
     validateSelf(){
         return new Promise ((res, rej) => {
             if (this.required && this.element.value.length <= 0) {
-                
+
                 rej('Поле является обязательным')
             }
 
@@ -39,14 +39,12 @@ class Input {
                     }
     
                     if (this.checkLetters(this.element.value)) {
-                        debugger
                         rej('Логин должен состоять только из латинских символов, допускается использование цифр')
                     }
 
                     res(true)
                     break;
                 default:
-                    debugger
                     res(true)
                     break;
             }

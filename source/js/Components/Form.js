@@ -22,7 +22,6 @@ class Form {
         this.inputs.forEach(input => {
             input.validateSelf()
             .then( r => {
-                debugger
                 hasErrors = false
             })
             .catch( e => {

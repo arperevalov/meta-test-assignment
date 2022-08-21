@@ -25,8 +25,8 @@ class Router {
     }
 
     // checks if user logged or not
-    checkLogged(loggedState) {
-        if (!loggedState) {
+    checkLogged(currentUser) {
+        if (!currentUser) {
             if (this.getPath() !== this.routes.login && this.getPath() !== this.routes.reg) {
                 this.redirect(this.routes.login);
             }

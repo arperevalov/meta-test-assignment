@@ -1,23 +1,22 @@
 import Router from './Router';
 import DB from './DB';
 import SystemMessages from './SystemMessages';
+import md5 from 'md5';
 
 class App {
     constructor() {
         this.router = new Router();
         this.db = new DB();
         this.systemMessages = new SystemMessages();
-        this.logged = JSON.parse(localStorage.getItem('logged'));
+        this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
         this.checkRouterLogged();
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser'))
     }
 
     // sets user to DB
     setUserToDb(formData) {
         this.db.setUser(formData)
             .then(result => {
-                this.toggleLogged();
-                this.cacheUser(formData.login);
+                this.cacheUser(formData.login, md5(formData.pass));
                 this.checkRouterLogged();
                 this.redirect(this.router.routes.home)
                 return result
@@ -31,8 +30,7 @@ class App {
     logUser(login, pass) {
         this.db.logUser(login, pass)
             .then(result => {
-                this.toggleLogged();
-                this.cacheUser(login);
+                this.cacheUser(login, md5(pass));
                 this.checkRouterLogged();
                 this.redirect(this.router.routes.home);
                 return result
@@ -44,7 +42,6 @@ class App {
 
     // logs out user
     logoutUser() {
-        this.toggleLogged();
         this.clearUserCache();
         this.router.checkLogged();
     }
@@ -59,7 +56,7 @@ class App {
 
     // checks if current user logged
     checkRouterLogged() {
-        this.router.checkLogged(this.logged)
+        this.router.checkLogged(this.currentUser)
     }
 
     // redirects user
@@ -69,17 +66,13 @@ class App {
 
     // R E F A C T O R
 
-    // replace logged check
-    // instead give user JSON Token
-    toggleLogged() {
-        this.logged = !this.logged
-        localStorage.setItem('logged', JSON.stringify(this.logged))
-    }
-
     // memorize user to so-called-session
-    cacheUser(login) {
-        this.currentUser = login;
-        localStorage.setItem('currentUser', JSON.stringify(login))
+    cacheUser(login, pass) {
+        this.currentUser = {
+            login,
+            pass
+        };
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser))
     }
 
     // clears user from so-called-session
