@@ -1,5 +1,6 @@
 import App from './Components/App';
-import index from '../sass/index.sass'
+import index from '../sass/index.sass';
+import Form from './Components/Form';
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -23,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (document.getElementById('login-form')) {
         let form = document.getElementById('login-form');
+
+        let formComponent = new Form(form)
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();

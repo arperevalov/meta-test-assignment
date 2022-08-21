@@ -1,0 +1,5 @@
+@mixin media-scr-down($value)
+    $width: map-get($breakpoints, $value)
+    @media screen and ( max-width: $width)
+        @content
+        

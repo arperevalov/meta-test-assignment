@@ -7,6 +7,9 @@ body
     min-height: 100vh
     align-items: center
     justify-content: center
+    
+    @include media-scr-down(md)
+        align-items: flex-start
 
 .visually-hidden
     position: absolute
@@ -31,11 +34,18 @@ body
     font-size: rem(40)
     margin-bottom: rem(24)
 
+    @include media-scr-down(md)
+        font-size: rem(24)
+
 .h2
     font-size: rem(26)
     margin-bottom: rem(16)
 
+    @include media-scr-down(md)
+        font-size: rem(18)
+
 .small
+    font-family: 'Robotosdsdsdsd'
     font-size: rem(14)
 
 .text-muted

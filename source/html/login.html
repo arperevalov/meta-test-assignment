@@ -11,14 +11,14 @@
 <body>
     <main class="main">
         <h1 class="h1">Авторизация</h1>
-        <form class="form" id="login-form">
+        <form class="form" id="login-form" novalidate>
             <div class="input">
                 <label class="input__label" for="login">Логин*</label>
-                <input class="input__input" id="login" type="text" pattern="^.{6,15}">
+                <input class="input__input" id="login" type="text" pattern="^.{6,15}" data-custom-type="login">
             </div>
             <div class="input js-pass-toggle">
                 <label class="input__label" for="pass">Пароль*</label>
-                <input class="input__input" id="pass" type="password" pattern="^.{6,}">
+                <input class="input__input" id="pass" type="password" pattern="^.{6,}" data-custom-type="password" required>
                 <button type="button" class="input__toggle-pass js-pass-toggle-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path

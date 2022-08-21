@@ -50,7 +50,7 @@ class DB {
     logUser(login, pass) {
         return new Promise((res, rej) => {
             if (this.getUserID(login) < 0) {
-                rej(`Пользователя с логином ${formData.login} не существует`)
+                rej(`Пользователя с логином ${login} не существует`)
             } else {
                 if (this.db[this.getUserID(login)].pass === md5(pass)) {
                     res(true)

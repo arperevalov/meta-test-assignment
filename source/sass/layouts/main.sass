@@ -1,6 +1,21 @@
 .main
     width: 100%
-    max-width: 614px
+    max-width: rem(614)
     height: fit-content
     padding: rem(42)
     background: theme-color(light)
+
+    @include media-scr-down(md)
+        max-width: initial
+        height: fit-content
+        min-height: 100vh
+        padding: rem(32)
+        
+    @include media-scr-down(sm)
+        padding: rem(24) rem(16) rem(16)
+
+    &--lg
+        max-width: rem(704)
+
+        @include media-scr-down(md)
+            max-width: initial
