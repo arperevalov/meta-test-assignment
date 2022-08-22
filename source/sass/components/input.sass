@@ -2,6 +2,19 @@
     position: relative
     width: 100%
     margin: $input-margin
+    $self: &
+
+    &--error
+        #{$self}__input
+            border-color: theme-color(error)
+            color: theme-color(error)
+
+        #{$self}__validation-icon
+            background-image: $error-icon
+
+    &--success
+        #{$self}__validation-icon
+            background-image: $success-icon
 
     &__input
         height: $input-height
@@ -9,6 +22,7 @@
         font-size: rem(16)
         outline: none
         border: none
+        border-radius: 0
         border-bottom: 1px solid theme-color(base)
         transition: $transition-fast
         
@@ -32,7 +46,7 @@
         width: fit-content
         height: fit-content
         position: absolute
-        bottom: 0
+        top: rem(24)
         right: 0
         transition: $transition-fast
 
@@ -45,3 +59,17 @@
 
         &.show
             width: 100%
+
+    &__error
+        margin-top: rem(4)
+        font-size: rem(14)
+        color: theme-color(error)
+
+    &__validation-icon
+        display: block
+        width: rem(24)
+        height: rem(24)
+        background: transparent
+        position: absolute
+        top: rem(24)
+        right: 0

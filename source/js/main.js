@@ -10,15 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let form = document.getElementById('reg-form');
         let formData;
 
+        let formComponent = new Form(form)
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            formData = {
-                login: form.login.value,
-                pass: form.pass.value,
-                tel: form.tel.value,
-                email: form.email.value
-            }
-            app.setUserToDb(formData);
+            // formData = {
+            //     login: form.login.value,
+            //     pass: form.pass.value,
+            //     tel: form.tel.value,
+            //     email: form.email.value
+            // }
+            // app.setUserToDb(formData);
         });
     }
 
