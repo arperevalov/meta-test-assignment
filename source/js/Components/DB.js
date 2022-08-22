@@ -2,8 +2,14 @@ import md5 from "md5";
 
 class DB {
     constructor() {
-        this.db = this.getCookie('users');
-        this.currentUser = this.getCookie('currentUser');
+        if (!!window.chrome) {
+            this.db = JSON.parse(localStorage.getItem('users'));
+            this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        } else {
+            this.db = this.getCookie('users');
+            this.currentUser = this.getCookie('currentUser');
+        }
+
         this.init()
     }
 
@@ -22,18 +28,32 @@ class DB {
     // set DB if not set
     init() {
         if (this.db === null || this.db === undefined) {
-            document.cookie = `users=[]`
+            this.db = [];
+            
+            if (!!window.chrome) {
+                localStorage.setItem('users', JSON.stringify(this.db));
+            } else {
+                document.cookie = `users=${JSON.stringify(this.db)}`;
+            }
         }
     }
 
     // set updates to DB
     updateDb() {
-        document.cookie = `users=${JSON.stringify(this.db)}`;
+        if (!!window.chrome) {
+            localStorage.setItem('users', JSON.stringify(this.db));
+        } else {
+            document.cookie = `users=${JSON.stringify(this.db)}`;
+        }
         return true
     }
 
     updateCurrentUser() {
-        document.cookie = `currentUser=${JSON.stringify(this.currentUser)}`;
+        if (!!window.chrome) {
+            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        } else {
+            document.cookie = `currentUser=${JSON.stringify(this.currentUser)}`;
+        }
         return true
     }
 
@@ -66,7 +86,6 @@ class DB {
                     login: formData.login,
                     pass: md5(formData.pass)
                 }
-                debugger
                 this.updateCurrentUser();
                 this.updateDb()
                 res(true)
