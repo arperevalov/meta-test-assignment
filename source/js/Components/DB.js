@@ -69,10 +69,10 @@ class DB {
     }
 
     // set user to Database
-    setUser(formData) {
-        return new Promise((res, rej) => {
+    async setUser(formData) {
+        try {
             if (this.getUserID(formData.login) >= 0) {
-                rej(`Пользователь с логином ${formData.login} уже существует`)
+                throw `Пользователь с логином ${formData.login} уже существует`
             } else {
                 this.db = [
                     ...this.db,
@@ -88,16 +88,18 @@ class DB {
                 }
                 this.updateCurrentUser();
                 this.updateDb()
-                res(true)
+                return true
             }
-        })
+        } catch (e) {
+            throw e
+        }
     }
 
     // check passwords and log user to app
-    logUser(formData) {
-        return new Promise((res, rej) => {
+    async logUser(formData) {
+        try {
             if (this.getUserID(formData.login) < 0) {
-                rej(`Пользователя с логином ${formData.login} не существует`)
+                throw `Пользователя с логином ${formData.login} не существует`
             } else {
                 if (this.db[this.getUserID(formData.login)].pass === md5(formData.pass)) {
                     this.currentUser = {
@@ -105,12 +107,14 @@ class DB {
                         pass: md5(formData.pass)
                     }
                     this.updateCurrentUser();
-                    res(true)
+                    return true
                 } else {
-                    rej('Введен неправильный пароль')
+                    throw 'Введен неправильный пароль'
                 }
             }
-        })
+        } catch (e) {
+            throw e
+        }
     }
 
     logoutUser() {
@@ -119,11 +123,12 @@ class DB {
     }
 
     // update tel, email user values from form
-    updateUserData(formData) {
-        return new Promise((res,rej) => {
+    async updateUserData(formData) {
+        try {
             let index = this.getUserID(this.currentUser.login);
+
             if (index < 0) {
-                rej(`Произошла ошибка. Не получается обновить пользователя`)
+                throw `Произошла ошибка. Не получается обновить пользователя`
             }
 
             let user = {
@@ -132,15 +137,18 @@ class DB {
             }
             this.db.splice(index, 1, user)
             this.updateDb()
-            res(true)
-        }) 
+
+            return true
+        } catch (e) {
+            throw e
+        }
     }
 
-    updateUserPass(formData) {
-        return new Promise((res, rej) => {
+    async updateUserPass(formData) {
+        try {
             let index = this.getUserID(this.currentUser.login)
             if (index < 0) {
-                rej(`Произошла ошибка. Не получается обновить пользователя`)
+                throw `Произошла ошибка. Не получается обновить пользователя`
             }
 
             let user = {
@@ -154,8 +162,11 @@ class DB {
             }
             this.updateCurrentUser()
             this.updateDb()
-            res(true)
-        })
+            
+            return true
+        } catch (e) {
+            throw e
+        }
     }
 
     // get data of user from DB

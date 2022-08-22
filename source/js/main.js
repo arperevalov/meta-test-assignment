@@ -14,13 +14,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            // formData = {
-            //     login: form.login.value,
-            //     pass: form.pass.value,
-            //     tel: form.tel.value,
-            //     email: form.email.value
-            // }
-            // app.setUserToDb(formData);
+
+            formComponent.validate()
+            .then(r => {
+                formData = {
+                    login: form.login.value,
+                    pass: form.passRepeat.value,
+                    tel: form.tel.value,
+                    email: form.email.value
+                }
+                app.setUserToDb(formData);
+            })
+            .catch(e => {
+                console.log(e)
+            })
         });
     }
 
@@ -31,10 +38,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            app.logUser({
-                login: form.login.value, 
-                pass: form.pass.value
-            });
+
+            formComponent.validate()
+            .then(r => {
+                app.logUser({
+                    login: form.login.value, 
+                    pass: form.pass.value
+                });
+            })
+            .catch(e => {
+                console.log(e)
+            })
         });
     }
 
@@ -55,11 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
             form.querySelector('input#tel').value = res.tel;
         });
 
+        let formComponent = new Form(form)
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            app.updateUserData({
-                email: form.email.value,
-                tel: form.tel.value
+            formComponent.validate()
+            .then(r => {
+                app.updateUserData({
+                    email: form.email.value,
+                    tel: form.tel.value
+                })
+            })
+            .catch(e => {
+                console.log(e)
             })
         })
     }
@@ -67,9 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('new-password-form')) {
         let form = document.getElementById('new-password-form');
 
+        let formComponent = new Form(form)
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            app.updateUserPass({pass: form.newPass2.value});
+            formComponent.validate()
+            .then(r => {
+                app.updateUserPass({pass: form.newPass2.value});
+            })
+            .catch(e => {
+                console.log(e)
+            })
         });
     }
 

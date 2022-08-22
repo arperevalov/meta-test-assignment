@@ -111,7 +111,8 @@ class Input {
                     break;
 
                 case this.TYPES.passwordRepeat:
-                    let firstInput = document.querySelector('input[type=password][data-custom-type=password]');
+                    let firstInput = document.querySelector(`input[data-custom-type=${this.TYPES.password}]`);
+                    debugger
                     if (firstInput.value !== this.element.value) {
                         let error = 'Пароли не совпадают'
                         this.generateError(error)

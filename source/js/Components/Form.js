@@ -3,33 +3,26 @@ import Input from "./Input";
 class Form {
     constructor(element) {
         this.element = element;
-        this.inputs = [...document.querySelectorAll('input')].map(input => new Input(input))
-        this.addListener()
+        this.inputs = [...this.element.querySelectorAll('input')].map(input => new Input(input))
     }
-    
-    addListener() {
-        this.element.addEventListener('submit', (e)=>{
-            e.preventDefault();
-            if (!this.validate()) {
-                console.log('make action')
+
+    async validate() {
+        try {
+            const errors = [];
+            await this.inputs.forEach(input => {                
+                input.validateSelf().catch(e => {
+                    errors.push(e)
+                    throw e
+                })
+            })
+            if (errors.length < 1) {
+                return true
+            } else {
+                throw 'В форме есть ошибки'
             }
-        })
-    }
-
-    validate() {
-        let hasErrors;
-
-        this.inputs.forEach(input => {
-            input.validateSelf()
-            .then( r => {
-                hasErrors = false
-            })
-            .catch( e => {
-                hasErrors = true
-            })
-        })
-
-        return hasErrors
+        } catch (e) {
+            throw e;
+        }
     }
 };
 

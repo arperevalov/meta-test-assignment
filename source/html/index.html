@@ -11,28 +11,28 @@
 <body>
     <main class="main main--lg">
         <h1 class="h1">Контактные данные</h1>
-        <form class="form form--with-margins" id="update-form">
+        <form class="form form--with-margins" id="update-form" novalidate>
             <div class="input">
                 <label class="input__label" for="login">Логин*</label>
                 <input class="input__input" id="login" type="text" readonly >
             </div>
             <div class="input">
                 <label class="input__label" for="tel">Телефон</label>
-                <input class="input__input" id="tel" type="tel">
+                <input class="input__input" id="tel" type="tel" data-custom-type="tel">
             </div>
             <div class="input">
                 <label class="input__label" for="email">E-mail</label>
-                <input class="input__input" id="email" type="email">
+                <input class="input__input" id="email" type="email" data-custom-type="email">
             </div>
 
             <button class="btn btn--submit" type="submit">Сохранить изменения</button>
         </form>
 
         <h2 class="h2">Сменить пароль</h2>
-        <form class="form" id="new-password-form">
+        <form class="form" id="new-password-form" novalidate>
             <div class="input js-pass-toggle">
                 <label class="input__label" for="newPass1">Новый пароль*</label>
-                <input class="input__input" id="newPass1" name="newPass1" type="password" pattern="^.{6,}">
+                <input class="input__input" id="newPass1" name="newPass1" type="password" required data-custom-type="password">
                 <button type="button" class="input__toggle-pass js-pass-toggle-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 9.27283C10.4954 9.27283 9.27271 10.4955 9.27271 12.0001C9.27271 13.5046 10.4954 14.7274 12 14.7274C13.5045 14.7274 14.7272 13.5046 14.7272 12.0001C14.7272 10.4955 13.5045 9.27283 12 9.27283Z"/>
@@ -47,7 +47,7 @@
             </div>
             <div class="input js-pass-toggle">
                 <label class="input__label" for="newPass2">Повторить новый пароль*</label>
-                <input class="input__input" id="newPass2" name="newPass2" type="password" pattern="^.{6,}">
+                <input class="input__input" id="newPass2" name="newPass2" type="password" required data-custom-type="password-repeat">
                 <button type="button" class="input__toggle-pass js-pass-toggle-btn">
                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 9.27283C10.4954 9.27283 9.27271 10.4955 9.27271 12.0001C9.27271 13.5046 10.4954 14.7274 12 14.7274C13.5045 14.7274 14.7272 13.5046 14.7272 12.0001C14.7272 10.4955 13.5045 9.27283 12 9.27283Z"/>
